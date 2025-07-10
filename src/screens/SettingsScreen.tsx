@@ -149,7 +149,7 @@ export default function SettingsScreen() {
             <View style={styles.settingText}>
               <Text style={styles.settingTitle}>Rate App</Text>
               <Text style={styles.settingDescription}>
-                Rate and review DataViz Analytics
+                Rate and review Dashly
               </Text>
             </View>
           </View>

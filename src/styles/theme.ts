@@ -1,5 +1,5 @@
 /**
- * Theme and styling configuration for DataViz Analytics
+ * Theme and styling configuration for Dashly
  */
 
 export const lightTheme = {

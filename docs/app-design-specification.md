@@ -1,8 +1,8 @@
-# DataViz Analytics - Mobile App Design Specification
+# Dashly - Mobile App Design Specification
 
 ## 1. Executive Summary
 
-**Project Name:** DataViz Analytics  
+**Project Name:** Dashly  
 **Platform:** Cross-platform Mobile Application (iOS/Android)  
 **Framework:** React Native with Expo  
 **Target Audience:** Data analysts, business professionals, and students  
@@ -10,7 +10,7 @@
 
 ## 2. App Overview
 
-DataViz Analytics is a comprehensive mobile application that transforms raw data from Excel, CSV, and SQL files into interactive dashboards and actionable insights. The app leverages open-source AI models to provide intelligent chart generation, data analysis, and question-answering capabilities.
+Dashly is a comprehensive mobile application that transforms raw data from Excel, CSV, and SQL files into interactive dashboards and actionable insights. The app leverages open-source AI models to provide intelligent chart generation, data analysis, and question-answering capabilities.
 
 ### 2.1 Core Value Proposition
 - **Unified Platform:** All data analysis tools in one mobile app

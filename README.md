@@ -1,4 +1,4 @@
-# DataViz Analytics
+# Dashly
 
 A comprehensive React Native mobile application for data visualization and analytics. Transform your Excel, CSV, and SQL data into interactive dashboards with AI-powered insights.
 
@@ -91,4 +91,4 @@ src/
 
 ---
 
-**DataViz Analytics** - Transform your data into actionable insights on the go! 📊✨
+**Dashly** - Transform your data into actionable insights on the go! 📊✨

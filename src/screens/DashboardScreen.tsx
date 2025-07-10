@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, RefreshControl, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { Logo } from '../components/Logo';
 import { DashboardViewer } from '../components/DashboardViewer';
 import { dataService } from '../services/DataService';
 import { useTheme } from '../styles/useTheme';
