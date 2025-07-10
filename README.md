@@ -1,50 +1,94 @@
+# DataViz Analytics
 
-# TypeScript
+A comprehensive React Native mobile application for data visualization and analytics. Transform your Excel, CSV, and SQL data into interactive dashboards with AI-powered insights.
 
-[![CI](https://github.com/microsoft/TypeScript/actions/workflows/ci.yml/badge.svg)](https://github.com/microsoft/TypeScript/actions/workflows/ci.yml)
-[![npm version](https://badge.fury.io/js/typescript.svg)](https://www.npmjs.com/package/typescript)
-[![Downloads](https://img.shields.io/npm/dm/typescript.svg)](https://www.npmjs.com/package/typescript)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/microsoft/TypeScript/badge)](https://securityscorecards.dev/viewer/?uri=github.com/microsoft/TypeScript)
+## 🌟 Features
 
+- **Multi-format Data Import**: Support for Excel (.xlsx, .xls), CSV, and SQL files
+- **Interactive Dashboards**: Touch-friendly, responsive visualizations
+- **AI-Powered Insights**: Natural language queries and automated analysis
+- **SQL Query Editor**: Built-in editor with syntax highlighting
+- **Light/Dark Mode**: Automatic theme switching
+- **Cross-platform**: Runs on iOS, Android, and Web
 
-[TypeScript](https://www.typescriptlang.org/) is a language for application-scale JavaScript. TypeScript adds optional types to JavaScript that support tools for large-scale JavaScript applications for any browser, for any host, on any OS. TypeScript compiles to readable, standards-based JavaScript. Try it out at the [playground](https://www.typescriptlang.org/play/), and stay up to date via [our blog](https://blogs.msdn.microsoft.com/typescript) and [Twitter account](https://twitter.com/typescript).
+## 🚀 Getting Started
 
-Find others who are using TypeScript at [our community page](https://www.typescriptlang.org/community/).
+### Prerequisites
 
-## Installing
+- Node.js (v14 or higher)
+- npm or yarn
+- Expo CLI
+- iOS Simulator or Android Emulator (for testing)
 
-For the latest stable version:
+### Installation
 
+1. Clone the repository:
 ```bash
-npm install -D typescript
+git clone https://github.com/your-username/dataviz-analytics.git
+cd dataviz-analytics
 ```
 
-For our nightly builds:
-
+2. Install dependencies:
 ```bash
-npm install -D typescript@next
+npm install
 ```
 
-## Contribute
+3. Start the development server:
+```bash
+npm start
+```
 
-There are many ways to [contribute](https://github.com/microsoft/TypeScript/blob/main/CONTRIBUTING.md) to TypeScript.
-* [Submit bugs](https://github.com/microsoft/TypeScript/issues) and help us verify fixes as they are checked in.
-* Review the [source code changes](https://github.com/microsoft/TypeScript/pulls).
-* Engage with other TypeScript users and developers on [StackOverflow](https://stackoverflow.com/questions/tagged/typescript).
-* Help each other in the [TypeScript Community Discord](https://discord.gg/typescript).
-* Join the [#typescript](https://twitter.com/search?q=%23TypeScript) discussion on Twitter.
-* [Contribute bug fixes](https://github.com/microsoft/TypeScript/blob/main/CONTRIBUTING.md).
+4. Run on your preferred platform:
+```bash
+# iOS
+npm run ios
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see
-the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com)
-with any additional questions or comments.
+# Android
+npm run android
 
-## Documentation
+# Web
+npm run web
+```
 
-*  [TypeScript in 5 minutes](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
-*  [Programming handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
-*  [Homepage](https://www.typescriptlang.org/)
+## 📱 App Structure
 
-## Roadmap
+```
+src/
+├── components/          # Reusable UI components
+├── screens/            # Main app screens
+├── navigation/         # Navigation configuration
+├── services/          # API and data services
+├── utils/            # Utility functions
+├── types/            # TypeScript type definitions
+├── hooks/            # Custom React hooks
+└── styles/           # Styling and theme configuration
+```
 
-For details on our planned features and future direction, please refer to our [roadmap](https://github.com/microsoft/TypeScript/wiki/Roadmap).
+## 🎨 Design System
+
+### Colors
+- Primary: `#2563EB` (Blue)
+- Secondary: `#10B981` (Green)
+- Background: `#FFFFFF` (White) / `#111827` (Dark)
+
+### Typography
+- Font Family: Inter (with system fallbacks)
+- Code Font: JetBrains Mono
+
+## 🔧 Tech Stack
+
+- **Framework**: React Native with Expo
+- **Language**: TypeScript
+- **Navigation**: React Navigation 6
+- **Charts**: React Native Chart Kit
+- **Storage**: AsyncStorage + SQLite
+
+## 📱 Target Audience
+
+- **Data Analysts**: Professional data analysis and visualization
+- **Business Professionals**: Quick insights from business data
+- **Students**: Learning data analysis and visualization concepts
+
+---
+
+**DataViz Analytics** - Transform your data into actionable insights on the go! 📊✨

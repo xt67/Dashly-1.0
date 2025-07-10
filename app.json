@@ -1,4 +1,21 @@
 {
-  "name": "new",
-  "slug": "new"
+  "expo": {
+    "name": "DataViz Analytics",
+    "slug": "dataviz-analytics",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.datavizanalytics.app"
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
 }
