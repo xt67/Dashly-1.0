@@ -1,5 +1,5 @@
 /**
- * Core data types for DataViz Analytics app
+ * Core data types for Dashly app
  */
 
 export interface ImportedDataset {
@@ -165,7 +165,7 @@ export interface UserPreferences {
 }
 
 export interface NavigationParamList extends Record<string, object | undefined> {
-  Dashboard: undefined;
+  Home: undefined;
   DataInput: undefined;
   SQLEditor: { queryId?: string };
   AIInsights: { datasetId?: string };

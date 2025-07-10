@@ -108,25 +108,34 @@ class DataService {
   async saveDataSource(dataSource: DataSource): Promise<void> {
     if (!this.db) throw new Error('Database not initialized');
 
-    await this.db.runAsync(
-      `
-        INSERT OR REPLACE INTO data_sources 
-        (id, name, type, file_path, connection_string, created_at, updated_at, size, row_count, column_count)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `,
-      [
-        dataSource.id,
-        dataSource.name,
-        dataSource.type,
-        dataSource.filePath || '',
-        dataSource.connectionString || '',
-        dataSource.createdAt.getTime(),
-        dataSource.updatedAt.getTime(),
-        dataSource.size,
-        dataSource.rowCount,
-        dataSource.columnCount,
-      ]
-    );
+    try {
+      console.log('DataService: Saving data source:', dataSource.id, dataSource.name);
+      
+      await this.db.runAsync(
+        `
+          INSERT OR REPLACE INTO data_sources 
+          (id, name, type, file_path, connection_string, created_at, updated_at, size, row_count, column_count)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `,
+        [
+          dataSource.id,
+          dataSource.name,
+          dataSource.type,
+          dataSource.filePath || '',
+          dataSource.connectionString || '',
+          dataSource.createdAt.getTime(),
+          dataSource.updatedAt.getTime(),
+          dataSource.size,
+          dataSource.rowCount,
+          dataSource.columnCount,
+        ]
+      );
+      
+      console.log('DataService: Data source saved successfully');
+    } catch (error) {
+      console.error('DataService: Failed to save data source:', error);
+      throw error;
+    }
   }
 
   /**
@@ -157,24 +166,34 @@ class DataService {
   async saveDataset(dataset: Dataset): Promise<void> {
     if (!this.db) throw new Error('Database not initialized');
 
-    await this.db.runAsync(
-      `
-        INSERT OR REPLACE INTO datasets 
-        (id, source_id, name, description, metadata, created_at)
-        VALUES (?, ?, ?, ?, ?, ?)
-      `,
-      [
-        dataset.id,
-        dataset.sourceId,
-        dataset.name,
-        dataset.description || '',
-        JSON.stringify(dataset.metadata),
-        Date.now(),
-      ]
-    );
+    try {
+      console.log('DataService: Saving dataset:', dataset.id, dataset.name);
+      console.log('DataService: Dataset data length:', dataset.data.length);
+      
+      await this.db.runAsync(
+        `
+          INSERT OR REPLACE INTO datasets 
+          (id, source_id, name, description, metadata, created_at)
+          VALUES (?, ?, ?, ?, ?, ?)
+        `,
+        [
+          dataset.id,
+          dataset.sourceId,
+          dataset.name,
+          dataset.description || '',
+          JSON.stringify(dataset.metadata),
+          Date.now(),
+        ]
+      );
 
-    // Store the actual data in AsyncStorage for larger datasets
-    await AsyncStorage.setItem(`dataset_data_${dataset.id}`, JSON.stringify(dataset.data));
+      // Store the actual data in AsyncStorage for larger datasets
+      console.log('DataService: Storing dataset data in AsyncStorage...');
+      await AsyncStorage.setItem(`dataset_data_${dataset.id}`, JSON.stringify(dataset.data));
+      console.log('DataService: Dataset saved successfully');
+    } catch (error) {
+      console.error('DataService: Failed to save dataset:', error);
+      throw error;
+    }
   }
 
   /**
@@ -199,6 +218,38 @@ class DataService {
       data: data ? JSON.parse(data) : [],
       metadata: JSON.parse(row.metadata),
     };
+  }
+
+  /**
+   * Get all datasets
+   */
+  async getDatasets(): Promise<Dataset[]> {
+    if (!this.db) throw new Error('Database not initialized');
+
+    try {
+      const result = await this.db.getAllAsync('SELECT * FROM datasets ORDER BY created_at DESC');
+      
+      const datasets: Dataset[] = [];
+      for (const row of result) {
+        const rowData = row as any;
+        const data = await AsyncStorage.getItem(`dataset_data_${rowData.id}`);
+        
+        datasets.push({
+          id: rowData.id,
+          sourceId: rowData.source_id,
+          name: rowData.name,
+          description: rowData.description || undefined,
+          columns: [], // Would be derived from metadata
+          data: data ? JSON.parse(data) : [],
+          metadata: JSON.parse(rowData.metadata),
+        });
+      }
+      
+      return datasets;
+    } catch (error) {
+      console.error('DataService: Failed to get datasets:', error);
+      return [];
+    }
   }
 
   /**

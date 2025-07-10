@@ -52,33 +52,127 @@ export const processExcelFile = async (fileUri: string, fileName: string): Promi
 };
 
 /**
+ * Test CSV processing with sample data
+ */
+export const testCSVProcessing = (): ProcessedData => {
+  const sampleCSV = `Name,Age,City,Email
+John Doe,30,New York,john@example.com
+Jane Smith,25,Los Angeles,jane@example.com
+Bob Johnson,35,Chicago,bob@example.com`;
+
+  try {
+    const lines = sampleCSV.split('\n');
+    const headers = lines[0].split(',');
+    const rows = lines.slice(1).map(line => line.split(','));
+
+    return {
+      headers,
+      rows,
+      metadata: {
+        rowCount: rows.length,
+        columnCount: headers.length,
+        fileSize: sampleCSV.length,
+        fileName: 'test.csv',
+      },
+    };
+  } catch (error) {
+    throw new Error(`Test CSV processing failed: ${error}`);
+  }
+};
+
+/**
  * Process CSV file and extract data
  */
-export const processCSVFile = async (fileContent: string, fileName: string): Promise<ProcessedData> => {
-  return new Promise((resolve, reject) => {
-    Papa.parse(fileContent, {
-      complete: (results) => {
-        const headers = results.data[0] as string[];
-        const rows = results.data.slice(1) as any[][];
-        
-        resolve({
-          headers,
-          rows,
-          metadata: {
-            rowCount: rows.length,
-            columnCount: headers.length,
-            fileSize: fileContent.length,
-            fileName,
-          },
-        });
-      },
-      error: (error: any) => {
-        reject(new Error(`Failed to process CSV file: ${error.message}`));
-      },
-      header: false,
-      skipEmptyLines: true,
+export const processCSVFile = async (fileUri: string, fileName: string): Promise<ProcessedData> => {
+  try {
+    console.log('processCSVFile: Starting with URI:', fileUri);
+    
+    // Check if file exists
+    const fileInfo = await FileSystem.getInfoAsync(fileUri);
+    console.log('processCSVFile: File info:', fileInfo);
+    
+    if (!fileInfo.exists) {
+      throw new Error(`File does not exist at URI: ${fileUri}`);
+    }
+    
+    // Read the file content
+    console.log('processCSVFile: Reading file content...');
+    const fileContent = await FileSystem.readAsStringAsync(fileUri);
+    console.log('processCSVFile: File content length:', fileContent.length);
+    console.log('processCSVFile: First 200 chars:', fileContent.substring(0, 200));
+    
+    if (!fileContent || fileContent.trim().length === 0) {
+      throw new Error('CSV file is empty or could not be read');
+    }
+    
+    return new Promise((resolve, reject) => {
+      console.log('processCSVFile: Starting Papa Parse...');
+      Papa.parse<string[]>(fileContent, {
+        complete: (results) => {
+          try {
+            console.log('processCSVFile: Papa Parse complete');
+            console.log('processCSVFile: Results:', {
+              dataLength: results.data?.length,
+              errors: results.errors,
+              meta: results.meta
+            });
+            
+            if (results.errors && results.errors.length > 0) {
+              console.warn('processCSVFile: Parse errors:', results.errors);
+            }
+            
+            if (!results.data || results.data.length === 0) {
+              reject(new Error('CSV file appears to be empty or could not be parsed'));
+              return;
+            }
+
+            const headers = results.data[0] as string[];
+            console.log('processCSVFile: Headers:', headers);
+            
+            if (!headers || headers.length === 0) {
+              reject(new Error('CSV file has no headers'));
+              return;
+            }
+            
+            const rows = results.data.slice(1).filter(row => 
+              Array.isArray(row) && row.some(cell => cell !== null && cell !== undefined && cell !== '')
+            ) as any[][];
+            
+            console.log('processCSVFile: Filtered rows count:', rows.length);
+            console.log('processCSVFile: First row sample:', rows[0]);
+            
+            const processedData = {
+              headers: headers.map(h => h?.toString() || ''),
+              rows,
+              metadata: {
+                rowCount: rows.length,
+                columnCount: headers.length,
+                fileSize: fileInfo.size || fileContent.length,
+                fileName,
+              },
+            };
+            
+            console.log('processCSVFile: Processing complete, returning data');
+            resolve(processedData);
+          } catch (parseError) {
+            console.error('processCSVFile: Error in parse completion:', parseError);
+            reject(new Error(`Failed to parse CSV data: ${parseError}`));
+          }
+        },
+        error: (error: any) => {
+          console.error('processCSVFile: Papa Parse error:', error);
+          reject(new Error(`Failed to process CSV file: ${error.message || error}`));
+        },
+        header: false,
+        skipEmptyLines: true,
+        delimiter: '', // Auto-detect delimiter
+        dynamicTyping: false, // Keep all data as strings for now
+      });
     });
-  });
+  } catch (error) {
+    console.error('processCSVFile: Outer catch error:', error);
+    throw new Error(`Failed to read CSV file: ${error}`);
+  }
 };
 
 /**
@@ -229,6 +323,7 @@ export const dataProcessor = {
   generateColumnStats,
   formatFileSize,
   formatNumber,
+  testCSVProcessing,
 };
 
 export default dataProcessor;

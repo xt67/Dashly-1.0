@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "DataViz Analytics",
-    "slug": "dataviz-analytics",
+    "name": "Dashly",
+    "slug": "dashly",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
@@ -12,7 +12,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.datavizanalytics.app"
+      "package": "com.dashly.app"
     },
     "web": {
       "bundler": "metro"

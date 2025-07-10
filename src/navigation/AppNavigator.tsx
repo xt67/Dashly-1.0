@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
+import { View } from 'react-native';
 
 // Import screens
 import DashboardScreen from '../screens/DashboardScreen';
@@ -11,7 +12,8 @@ import SQLEditorScreen from '../screens/SQLEditorScreen';
 import AIInsightsScreen from '../screens/AIInsightsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
-// Import types and theme
+// Import components and types
+import { Logo } from '../components/Logo';
 import { NavigationParamList } from '../types';
 import { useTheme } from '../styles/ThemeProvider';
 
@@ -29,7 +31,7 @@ export default function AppNavigator() {
             tabBarIcon: ({ focused, color, size }) => {
               let iconName: keyof typeof Ionicons.glyphMap;
 
-              if (route.name === 'Dashboard') {
+              if (route.name === 'Home') {
                 iconName = focused ? 'home' : 'home-outline';
               } else if (route.name === 'DataInput') {
                 iconName = focused ? 'cloud-upload' : 'cloud-upload-outline';
@@ -67,11 +69,11 @@ export default function AppNavigator() {
           })}
         >
           <Tab.Screen
-            name="Dashboard"
+            name="Home"
             component={DashboardScreen}
             options={{
-              tabBarLabel: 'Dashboard',
-              headerTitle: 'Dashboard',
+              tabBarLabel: 'Home',
+              headerTitle: 'Home',
             }}
           />
           <Tab.Screen
