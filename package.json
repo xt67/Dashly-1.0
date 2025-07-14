@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@dprint/formatter": "^0.4.1",
-    "@dprint/typescript": "0.93.3",
+    "@dprint/typescript": "0.95.8",
     "@esfx/canceltoken": "^1.0.0",
     "@eslint/js": "^9.17.0",
     "@octokit/rest": "^21.0.2",
