@@ -5,7 +5,7 @@ import * as DocumentPicker from 'expo-document-picker';
 import { useNavigation } from '@react-navigation/native';
 import { dataProcessor } from '../utils/dataProcessor';
 import { dataService } from '../services/DataService';
-import { useTheme } from '../styles/useTheme';
+import { useTheme } from '../styles/ThemeProvider';
 import { DatasetActionModal } from '../components/DatasetActionModal';
 import type { ImportedDataset, NavigationParamList } from '../types';
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';

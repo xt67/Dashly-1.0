@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Modal, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from '../styles/useTheme';
+import { useTheme } from '../styles/ThemeProvider';
 import { Chart } from './Chart';
 import type { Dashboard } from '../types';
 

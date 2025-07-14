@@ -153,3 +153,113 @@ export const animations = {
 
 export type Theme = typeof lightTheme;
 export type ThemeMode = 'light' | 'dark' | 'auto';
+
+// Color Schemes - Different color palettes for customization
+export const colorSchemes = {
+  blue: {
+    name: 'Ocean Blue',
+    light: {
+      primary: '#2563EB',
+      secondary: '#10B981',
+      accent: '#8B5CF6',
+      chart: ['#2563EB', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#06B6D4'],
+    },
+    dark: {
+      primary: '#3B82F6',
+      secondary: '#34D399',
+      accent: '#A78BFA',
+      chart: ['#3B82F6', '#34D399', '#FBBF24', '#F87171', '#A78BFA', '#22D3EE'],
+    },
+  },
+  purple: {
+    name: 'Royal Purple',
+    light: {
+      primary: '#7C3AED',
+      secondary: '#EC4899',
+      accent: '#F59E0B',
+      chart: ['#7C3AED', '#EC4899', '#F59E0B', '#EF4444', '#10B981', '#06B6D4'],
+    },
+    dark: {
+      primary: '#8B5CF6',
+      secondary: '#F472B6',
+      accent: '#FBBF24',
+      chart: ['#8B5CF6', '#F472B6', '#FBBF24', '#F87171', '#34D399', '#22D3EE'],
+    },
+  },
+  green: {
+    name: 'Forest Green',
+    light: {
+      primary: '#059669',
+      secondary: '#7C3AED',
+      accent: '#DC2626',
+      chart: ['#059669', '#7C3AED', '#F59E0B', '#DC2626', '#2563EB', '#06B6D4'],
+    },
+    dark: {
+      primary: '#10B981',
+      secondary: '#8B5CF6',
+      accent: '#EF4444',
+      chart: ['#10B981', '#8B5CF6', '#FBBF24', '#EF4444', '#3B82F6', '#22D3EE'],
+    },
+  },
+  orange: {
+    name: 'Sunset Orange',
+    light: {
+      primary: '#EA580C',
+      secondary: '#DC2626',
+      accent: '#7C3AED',
+      chart: ['#EA580C', '#DC2626', '#7C3AED', '#059669', '#2563EB', '#06B6D4'],
+    },
+    dark: {
+      primary: '#FB923C',
+      secondary: '#EF4444',
+      accent: '#8B5CF6',
+      chart: ['#FB923C', '#EF4444', '#8B5CF6', '#10B981', '#3B82F6', '#22D3EE'],
+    },
+  },
+  teal: {
+    name: 'Ocean Teal',
+    light: {
+      primary: '#0891B2',
+      secondary: '#059669',
+      accent: '#DC2626',
+      chart: ['#0891B2', '#059669', '#F59E0B', '#DC2626', '#7C3AED', '#2563EB'],
+    },
+    dark: {
+      primary: '#06B6D4',
+      secondary: '#10B981',
+      accent: '#EF4444',
+      chart: ['#06B6D4', '#10B981', '#FBBF24', '#EF4444', '#8B5CF6', '#3B82F6'],
+    },
+  },
+  pink: {
+    name: 'Rose Pink',
+    light: {
+      primary: '#E11D48',
+      secondary: '#7C3AED',
+      accent: '#059669',
+      chart: ['#E11D48', '#7C3AED', '#F59E0B', '#059669', '#2563EB', '#06B6D4'],
+    },
+    dark: {
+      primary: '#F43F5E',
+      secondary: '#8B5CF6',
+      accent: '#10B981',
+      chart: ['#F43F5E', '#8B5CF6', '#FBBF24', '#10B981', '#3B82F6', '#22D3EE'],
+    },
+  },
+};
+
+export type ColorScheme = keyof typeof colorSchemes;
+
+// Function to create theme with specific color scheme
+export const createThemeWithColorScheme = (baseTheme: typeof lightTheme, colorScheme: ColorScheme) => {
+  const isDark = baseTheme === darkTheme;
+  const schemeColors = colorSchemes[colorScheme][isDark ? 'dark' : 'light'];
+  
+  return {
+    ...baseTheme,
+    colors: {
+      ...baseTheme.colors,
+      ...schemeColors,
+    },
+  };
+};

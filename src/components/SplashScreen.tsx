@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 import { Logo } from './Logo';
-import { useTheme } from '../styles/useTheme';
+import { useTheme } from '../styles/ThemeProvider';
 
 interface SplashScreenProps {
   onAnimationEnd: () => void;

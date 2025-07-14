@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { DashboardViewer } from '../components/DashboardViewer';
 import { dataService } from '../services/DataService';
-import { useTheme } from '../styles/useTheme';
+import { useTheme } from '../styles/ThemeProvider';
 import type { Dataset, DataSource, Dashboard, NavigationParamList } from '../types';
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 
@@ -416,7 +416,6 @@ const styles = StyleSheet.create({
   pageTitle: {
     fontSize: 24,
     fontWeight: '700',
-    color: '#1F2937',
   },
   subtitleText: {
     fontSize: 16,
